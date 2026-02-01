@@ -1,0 +1,110 @@
+/* Footer.css */
+.footer-container {
+  background-color: #043550;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: #f0e8e8;
+}
+
+/* Add to Footer.css */
+.footer-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.footer-link a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+.footer-link a:hover {
+  color: #ff4500;
+}
+
+.footer-icon {
+  color: #f6f0f0;
+  font-size: 16px;
+  min-width: 20px;
+}
+
+/* Rest of your existing footer CSS... */
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-section {
+  margin-bottom: 20px;
+}
+
+.footer-heading {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #eee8e8;
+  position: relative;
+  padding-bottom: 8px;
+}
+
+.footer-heading::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 40px;
+  height: 2px;
+  background-color: #555;
+}
+
+.footer-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-list li {
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.footer-link {
+  color: #e6eaed;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.footer-link:hover {
+  color: #e3e9ef;
+  text-decoration: underline;
+}
+
+.footer-text {
+  line-height: 1.6;
+  margin: 0;
+}
+
+.footer-copyright {
+  text-align: center;
+  padding-top: 20px;
+  margin-top: 30px;
+  border-top: 1px solid #ddd;
+  font-size: 14px;
+  color: #f6f2f2;
+}
+
+@media (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
