@@ -15,17 +15,16 @@ const Contact = () => {
     message: ""
   });
 
-  // Handling input changes
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Submit form data to backend
+  // ✅ FIXED API CALL (NO localhost)
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:5000/api/contact", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -53,9 +52,10 @@ const Contact = () => {
 
   return (
     <div className="contact-page">
-
-      {/* Banner */}
-      <div className="contact-banner" style={{ backgroundImage: `url(${labBg})` }}>
+      <div
+        className="contact-banner"
+        style={{ backgroundImage: `url(${labBg})` }}
+      >
         <div className="banner-overlay">
           <div className="banner-content centered-banner">
             <div className="left-border" />
@@ -67,122 +67,36 @@ const Contact = () => {
         </div>
       </div>
 
-      {/* Contact Content */}
       <div className="contact-container">
-        
-        {/* LEFT DETAILS SECTION */}
         <div className="contact-info">
           <h2>SHELL & PEARL CHEMICALS</h2>
           <h3>Contact For Any Query</h3>
-          <p>
-            Shell & Pearl Chemicals is the leading Wholesale Trader of Ink Reducer,
-            Dimethyl Formamide, Mix Xylene, Tetrahydrofuran Liquid and many more.
-          </p>
 
           <div className="contact-details">
             <div className="contact-item">
-              <FaMapMarkerAlt className="contact-icon" />
-              <span>Ankleshwar GIDC, Bharuch, INDIA</span>
+              <FaMapMarkerAlt /> Ankleshwar GIDC, Bharuch, INDIA
             </div>
             <div className="contact-item">
-              <FaPhone className="contact-icon" />
-              <span>+91 92743 23212</span>
+              <FaPhone /> +91 92743 23212
             </div>
             <div className="contact-item">
-              <FaEnvelope className="contact-icon" />
-              <span>shellandpearlchemicals@gmail.com</span>
+              <FaEnvelope /> shellandpearlchemicals@gmail.com
             </div>
           </div>
         </div>
 
-        {/* RIGHT FORM SECTION */}
         <div className="contact-form">
           <h2>Contact Us</h2>
 
           <form onSubmit={handleSubmit}>
-
-            <div className="form-group">
-              <input 
-                type="text" 
-                name="name" 
-                placeholder="Your Name" 
-                required 
-                value={formData.name}
-                onChange={handleChange} 
-              />
-            </div>
-
-            <div className="form-row">
-              <div className="form-group">
-                <input 
-                  type="tel" 
-                  name="phone" 
-                  placeholder="Your Mobile" 
-                  required 
-                  value={formData.phone}
-                  onChange={handleChange} 
-                />
-              </div>
-
-              <div className="form-group">
-                <input 
-                  type="email" 
-                  name="email" 
-                  placeholder="Your Email" 
-                  required 
-                  value={formData.email}
-                  onChange={handleChange} 
-                />
-              </div>
-            </div>
-
-            <div className="form-row">
-              <div className="form-group">
-                <input 
-                  type="text" 
-                  name="location" 
-                  placeholder="Your Location" 
-                  required 
-                  value={formData.location}
-                  onChange={handleChange} 
-                />
-              </div>
-
-              <div className="form-group">
-                <input 
-                  type="text" 
-                  name="product" 
-                  placeholder="Product You Want" 
-                  required 
-                  value={formData.product}
-                  onChange={handleChange} 
-                />
-              </div>
-            </div>
-
-            <div className="form-group">
-              <input 
-                type="text" 
-                name="quantity" 
-                placeholder="Quantity / Size" 
-                required 
-                value={formData.quantity}
-                onChange={handleChange} 
-              />
-            </div>
-
-            <div className="form-group">
-              <textarea 
-                name="message" 
-                placeholder="Enter your requirement in details" 
-                required
-                value={formData.message}
-                onChange={handleChange}
-              ></textarea>
-            </div>
-
-            <button type="submit" className="contact-button">Contact Now</button>
-
+            <input name="name" placeholder="Your Name" required value={formData.name} onChange={handleChange} />
+            <input name="phone" placeholder="Your Mobile" required value={formData.phone} onChange={handleChange} />
+            <input name="email" placeholder="Your Email" required value={formData.email} onChange={handleChange} />
+            <input name="location" placeholder="Your Location" required value={formData.location} onChange={handleChange} />
+            <input name="product" placeholder="Product You Want" required value={formData.product} onChange={handleChange} />
+            <input name="quantity" placeholder="Quantity / Size" required value={formData.quantity} onChange={handleChange} />
+            <textarea name="message" placeholder="Enter your requirement" required value={formData.message} onChange={handleChange} />
+            <button type="submit">Contact Now</button>
           </form>
         </div>
       </div>
@@ -193,6 +107,3 @@ const Contact = () => {
 };
 
 export default Contact;
-
-
-
