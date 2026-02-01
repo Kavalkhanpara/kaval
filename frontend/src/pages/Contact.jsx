@@ -15,25 +15,29 @@ const Contact = () => {
     message: ""
   });
 
+  const [status, setStatus] = useState({ type: "", msg: "" });
+  const [loading, setLoading] = useState(false);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // ✅ FIXED API CALL (NO localhost)
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setStatus({});
 
     try {
-      const response = await fetch("/api/contact", {
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
-      const result = await response.json();
-      alert(result.message);
+      const data = await res.json();
 
-      if (result.success) {
+      if (data.success) {
+        setStatus({ type: "success", msg: data.message });
         setFormData({
           name: "",
           email: "",
@@ -43,19 +47,19 @@ const Contact = () => {
           quantity: "",
           message: ""
         });
+      } else {
+        setStatus({ type: "error", msg: data.message });
       }
-
-    } catch (error) {
-      alert("❌ Something went wrong. Try again.");
+    } catch {
+      setStatus({ type: "error", msg: "Server error. Try again later." });
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="contact-page">
-      <div
-        className="contact-banner"
-        style={{ backgroundImage: `url(${labBg})` }}
-      >
+      <div className="contact-banner" style={{ backgroundImage: `url(${labBg})` }}>
         <div className="banner-overlay">
           <div className="banner-content centered-banner">
             <div className="left-border" />
@@ -73,20 +77,21 @@ const Contact = () => {
           <h3>Contact For Any Query</h3>
 
           <div className="contact-details">
-            <div className="contact-item">
-              <FaMapMarkerAlt /> Ankleshwar GIDC, Bharuch, INDIA
-            </div>
-            <div className="contact-item">
-              <FaPhone /> +91 92743 23212
-            </div>
-            <div className="contact-item">
-              <FaEnvelope /> shellandpearlchemicals@gmail.com
-            </div>
+            <div className="contact-item"><FaMapMarkerAlt /> Ankleshwar GIDC, Bharuch, INDIA</div>
+            <div className="contact-item"><FaPhone /> +91 92743 23212</div>
+            <div className="contact-item"><FaEnvelope /> shellandpearlchemicals@gmail.com</div>
           </div>
         </div>
 
         <div className="contact-form">
           <h2>Contact Us</h2>
+
+          {/* ✅ ALERT MESSAGE */}
+          {status.msg && (
+            <div className={`form-alert ${status.type}`}>
+              {status.msg}
+            </div>
+          )}
 
           <form onSubmit={handleSubmit}>
             <input name="name" placeholder="Your Name" required value={formData.name} onChange={handleChange} />
@@ -96,7 +101,11 @@ const Contact = () => {
             <input name="product" placeholder="Product You Want" required value={formData.product} onChange={handleChange} />
             <input name="quantity" placeholder="Quantity / Size" required value={formData.quantity} onChange={handleChange} />
             <textarea name="message" placeholder="Enter your requirement" required value={formData.message} onChange={handleChange} />
-            <button type="submit">Contact Now</button>
+
+            {/* ✅ PROPER STYLED BUTTON */}
+            <button type="submit" className="contact-submit-btn" disabled={loading}>
+              {loading ? "Sending..." : "Submit Inquiry"}
+            </button>
           </form>
         </div>
       </div>
