@@ -76,7 +76,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; // ✅ Import navigation hook
-import './heroSlider.css';
+import './heroslider.css';
 import header1 from '../assets/header1.jpg';
 import header2 from '../assets/header2.jpg';
 
