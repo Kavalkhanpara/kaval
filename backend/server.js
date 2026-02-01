@@ -9,29 +9,19 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 10000;
 
 /* ===== FIX __dirname (ESM) ===== */
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 /* ===== MIDDLEWARE ===== */
-app.use(cors({
-  origin: "*",   // frontend + render domain allow
-}));
-app.use(express.json()); // bodyParser NOT needed in new Express
+app.use(cors({ origin: "*" }));
+app.use(express.json());
 
 /* ================= API ================= */
 app.post("/api/contact", async (req, res) => {
-  const {
-    name,
-    email,
-    phone,
-    location,
-    product,
-    quantity,
-    message,
-  } = req.body;
+  const { name, email, phone, location, product, quantity, message } = req.body;
 
   if (!name || !email || !phone || !location || !product || !quantity || !message) {
     return res.status(400).json({
@@ -41,14 +31,22 @@ app.post("/api/contact", async (req, res) => {
   }
 
   try {
-    /* ===== Nodemailer ===== */
+    /* ===== Nodemailer (RENDER SAFE CONFIG) ===== */
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      host: "smtp.gmail.com",
+      port: 587,
+      secure: false,
       auth: {
         user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS, // Gmail App Password
+        pass: process.env.EMAIL_PASS,
+      },
+      tls: {
+        rejectUnauthorized: false,
       },
     });
+
+    // ✅ VERY IMPORTANT: verify SMTP
+    await transporter.verify();
 
     await transporter.sendMail({
       from: `"Shell & Pearl Chemicals" <${process.env.EMAIL_USER}>`,
@@ -70,7 +68,7 @@ app.post("/api/contact", async (req, res) => {
 
     return res.json({
       success: true,
-      message: "Inquiry sent successfully",
+      message: "✅ Inquiry sent successfully",
     });
 
   } catch (error) {
