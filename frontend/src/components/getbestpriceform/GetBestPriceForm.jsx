@@ -1,5 +1,5 @@
 import React from "react";
-import "./GetBestPriceForm.css";
+import "./getBestPriceForm.css";
 
 const GetBestPriceForm = () => {
   return (

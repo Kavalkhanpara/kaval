@@ -6,7 +6,7 @@ import user2 from "../assets/user2.png";
 import user3 from "../assets/user3.png";
 import user4 from "../assets/user4.png";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import "./Testimonialsection.css";
+import "./testimonialsection.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 

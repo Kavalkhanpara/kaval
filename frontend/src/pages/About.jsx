@@ -1,7 +1,7 @@
 // src/pages/About.jsx
 import React from "react";
 import { FaCheck, FaPhone } from "react-icons/fa";
-import "./About.css";
+import "./about.css";
 import about1 from "../assets/about1.webp";
 import about2 from "../assets/about2.png";
 import labBg from "../assets/lab.png";

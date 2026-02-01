@@ -6,7 +6,7 @@ import Footer from "../components/footer/Footer";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import "./ProductPage.css";
+import "./productPage.css";
 
 /* =======================
    Product Images (1 → 37)

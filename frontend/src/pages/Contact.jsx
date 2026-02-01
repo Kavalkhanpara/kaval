@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaMapMarkerAlt, FaPhone, FaEnvelope } from "react-icons/fa";
 import Footer from "../components/footer/Footer";
 import labBg from "../assets/lab.png";
-import "./Contact.css";
+import "./contact.css";
 
 const Contact = () => {
   const [formData, setFormData] = useState({

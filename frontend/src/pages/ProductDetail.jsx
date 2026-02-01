@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import productDetails from "../data/ProductData";
-import "./ProductDetail.css";
+import "./productDetail.css";
 import labBg from "../assets/lab.png";
 
 const ProductDetail = () => {
