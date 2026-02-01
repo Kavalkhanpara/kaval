@@ -19,7 +19,7 @@ const __dirname = path.dirname(__filename);
 app.use(cors({ origin: "*" }));
 app.use(express.json());
 
-/* ================= API ================= */
+/* ================= CONTACT API ================= */
 app.post("/api/contact", async (req, res) => {
   const { name, email, phone, location, product, quantity, message } = req.body;
 
@@ -31,26 +31,20 @@ app.post("/api/contact", async (req, res) => {
   }
 
   try {
-    /* ===== Nodemailer (RENDER SAFE CONFIG) ===== */
+    /* ===== BREVO SMTP (RENDER SAFE) ===== */
     const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
+      host: "smtp-relay.brevo.com",
       port: 587,
       secure: false,
       auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-      tls: {
-        rejectUnauthorized: false,
+        user: process.env.BREVO_SMTP_USER,   // a145dd001@smtp-brevo.com
+        pass: process.env.BREVO_SMTP_PASS,   // SMTP KEY
       },
     });
 
-    // ✅ VERY IMPORTANT: verify SMTP
-    await transporter.verify();
-
     await transporter.sendMail({
-      from: `"Shell & Pearl Chemicals" <${process.env.EMAIL_USER}>`,
-      to: process.env.EMAIL_USER,
+      from: `"Shell & Pearl Chemicals" <${process.env.BREVO_SENDER}>`,
+      to: process.env.BREVO_RECEIVER,
       subject: `📩 New Chemical Inquiry - ${name}`,
       html: `
         <h2>New Inquiry</h2>
@@ -75,7 +69,7 @@ app.post("/api/contact", async (req, res) => {
     console.error("❌ Mail Error:", error);
     return res.status(500).json({
       success: false,
-      message: "Mail sending failed",
+      message: "❌ Mail sending failed",
     });
   }
 });
