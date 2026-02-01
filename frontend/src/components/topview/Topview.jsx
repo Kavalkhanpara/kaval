@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Topview.css";
+import "./topview.css";
 
 /* =======================
    Product Images (1 → 37)
