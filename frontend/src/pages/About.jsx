@@ -5,7 +5,7 @@ import "./About.css";
 import about1 from "../assets/about1.webp";
 import about2 from "../assets/about2.png";
 import labBg from "../assets/lab.png";
-import Footer from "../componenets/footer/Footer";
+import Footer from "../components/footer/Footer";
 
 const About = () => {
   return (
