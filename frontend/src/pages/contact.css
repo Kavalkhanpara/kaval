@@ -195,6 +195,46 @@ textarea {
   transform: translateY(-2px);
 }
 
+.contact-submit-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #0a4d8c, #0e6bb8);
+  color: #fff;
+  border: none;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+}
+
+.contact-submit-btn:hover {
+  background: linear-gradient(135deg, #083b6e, #0a5fa5);
+  transform: translateY(-1px);
+}
+
+.form-alert {
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.form-alert.success {
+  background: #e6f7ee;
+  color: #1e7e34;
+  border: 1px solid #b7ebc6;
+}
+
+.form-alert.error {
+  background: #fdecea;
+  color: #a71d2a;
+  border: 1px solid #f5c2c7;
+}
+
+
 /* -------------------- RESPONSIVE -------------------- */
 @media (max-width: 1024px) {
   .contact-container {
